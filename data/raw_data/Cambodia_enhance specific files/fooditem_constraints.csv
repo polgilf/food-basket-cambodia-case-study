@@ -1,0 +1,4 @@
+﻿ForAllPriceDates,Price_date,ForAllRegions,Region_ID,Region_Name,ForAllIndividuals,Individual_ID,Description,ENHANCE_ID,food_name,Minimum,Maximum,Price_100g,HD_exclude
+TRUE,,TRUE,,,TRUE,,,55840,"Pork/Goat, blood, coagulated",,10,,FALSE
+TRUE,,TRUE,,,TRUE,,,55595,"Beef, blood, coagulated",,10,,FALSE
+TRUE,,TRUE,,,TRUE,,,15557,"Soybean, dried, raw",0,0,,FALSE

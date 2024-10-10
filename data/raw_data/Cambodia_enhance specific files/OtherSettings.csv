@@ -1,0 +1,15 @@
+﻿Settings,Values,Description
+fat_energy_density,9," kcal/g, used to calculate minimum requirements for fat intake"
+protein_energy_density,4," kcal/g, used to calculate minimum requirements for protein intake"
+gram_conversion,100, prices and nutritional properties of food items are given per 100 gram
+footprint_conversion,1000,environmental footprint data are given per kilogram of food
+breastmilk_id,33706,
+id_child_under_6months,"1, 2, 3, 4, 5, 25, 26, 27, 28, 29, 49, 50, 51, 52, 53",Used for receiving breast milk
+id_child_between_6_23months,"6, 7, 8, 30, 31, 32, 54, 55, 56",Used for receiving breast milk
+supplement_ids,91,FG2 ids of supplements
+energy_range,2.5,Default percentage range of energy constraint
+min_protein,12,Minimum amount of protein (percentage value of EAR)
+default_staple_pct,50,The default percentage of energy that should come from staples
+default_breastfed_staple_pct,30,The default percentage of energy that should come from staples for breastfed individuals
+country_ID,115,ID of the country of analysis - will be used to filter the price data
+session_ID,,"Session ID of the analysis - this will be used to append outputs, i.e. if a file with this ID exists the output will be appended to that file if the country code matches"

@@ -1,0 +1,11 @@
+﻿Description,Id,diet_type,duplicate_description,zinc_setting,breastmilk,PBWG,PBWG_stage,base_staple_pct,min_ENERC_KCAL,min_PROTCNT,min_VITD,max_ENERC_KCAL,min_VITC,max_VITC,max_MG
+Child (either sex) 12-23 months,8,NAB,,Semiunref,TRUE,,,,,,,,,,
+Child (either sex) 6-7 years,13,NAB,,Semiunref,FALSE,,,,,,,,,,
+Female 14-15 years,45,NAB,,Semiunref,FALSE,,,,,,,,,,
+"Woman, 30-59y, 45 kg, moderately active",101,NAB,,Semiunref,FALSE,TRUE,6,,,,,,,,
+"Man, 30-59y, 50 kg, moderately active",182,NAB,,Semiunref,FALSE,,,,,,,,,,
+Child (either sex) 12-23 months,8,SANAB,,Semiunref,TRUE,,,,,,,,,,
+Child (either sex) 6-7 years,13,SANAB,,Semiunref,FALSE,,,,,,,,,,
+Female 14-15 years,45,SANAB,,Semiunref,FALSE,,,,,,,,,,
+"Woman, 30-59y, 45 kg, moderately active",101,SANAB,,Semiunref,FALSE,TRUE,6,,,,,,,,
+"Man, 30-59y, 50 kg, moderately active",182,SANAB,,Semiunref,FALSE,,,,,,,,,,

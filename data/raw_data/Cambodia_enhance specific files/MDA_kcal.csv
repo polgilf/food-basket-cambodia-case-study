@@ -1,0 +1,17 @@
+FG1,FG1_name,energy_ratio,energy_exception,FG_min_ratio,FG_max_ratio
+1,Grains and grain-based products,0.7,FALSE,,1
+25,Roots and tubers,0.5,FALSE,,1
+32,"Legumes, nuts and seeds",0.3,FALSE,,1
+39,Meat and offal,0.1,FALSE,,1
+46,"Fish, seafood, amphibians and invertebrates",0.1,FALSE,,1
+51,Eggs and egg products,0.1,FALSE,,1
+52,Milk and milk products,0.1,FALSE,,1
+58,Vegetables and vegetable products,0.05,FALSE,,1
+63,Fruit and fruit products,0.05,FALSE,,1
+67,Oils and fats,0.3,FALSE,,1
+70,Sugars and confectionary,0.1,FALSE,,1
+74,"Herbs, spices and condiments",1,TRUE,,1
+80,Beverages,0,TRUE,,
+84,Supplements and infant foods,0,TRUE,,
+93,Composite dishes,0.3,FALSE,,1
+94,Breast Milk,,,,

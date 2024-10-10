@@ -1,0 +1,7 @@
+﻿FGHDBID,FGHDBCODE,FGHDBNAME,hdb_numfoods,RDA_KCALDAY,FGHDBO_min_ratio,FGHDBO_max_ratio
+1,HDB_ASF,Animal Source Foods (+ Dairy),2,300,,
+2,HDB_F,Fruit,2,160,,
+3,HDB_LNS,Legumes Nuts & Seeds,1,300,,
+4,HDB_OF,Oils and Fats,1,300,,
+5,HDB_SS,Starchy Staples,2,1160,,
+6,HDB_V,Vegetable,3,110,,
