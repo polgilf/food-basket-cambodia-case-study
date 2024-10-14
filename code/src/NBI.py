@@ -243,51 +243,8 @@ def plot_NBI_3D(nbi, normalize_scale = True):
         ax.set_zlim3d([z_limits[0], z_limits[0] + max_range])
 
     plt.show()
-'''
-def plot_NBI_3D_to_2D(nbi, objectives_to_use, normalize_scale=True):
-    objective_values = nbi.solutions_ref_to_values()  # Dict with refpoint_id: [objective_values_of_solution]
-    reference_points = nbi.ref_points_dict  # Dict with refpoint_id: [objective_values_of_refpoint]
-    
-    # Filter the objective values and reference points based on objectives_to_use
-    filtered_objective_values = {
-        ref_id: [obj for obj, use in zip(obj_values, objectives_to_use) if use]
-        for ref_id, obj_values in objective_values.items()
-    }
-    filtered_reference_points = {
-        ref_id: [ref for ref, use in zip(ref_values, objectives_to_use) if use]
-        for ref_id, ref_values in reference_points.items()
-    }
-    
-    # Plot the Pareto front
-    plt.figure(figsize=(6, 6))
-    
-    # Plot solution points
-    for ref_id, obj_values in filtered_objective_values.items():
-        plt.scatter(obj_values[0], obj_values[1], color='red', s=40, zorder=5)
-    
-    # Line connecting reference points
-    for i in range(nbi.num_ref_points - 1):
-        plt.plot([filtered_reference_points[f'q{i+1}'][0], filtered_reference_points[f'q{i+2}'][0]], 
-                 [filtered_reference_points[f'q{i+1}'][1], filtered_reference_points[f'q{i+2}'][1]], color='blue', zorder=3)
-    
-    # Plot reference points
-    for ref_id, ref_values in filtered_reference_points.items():
-        plt.scatter(ref_values[0], ref_values[1], color='blue', s=20, zorder=6)
-    
-    # Plot the arrows connecting reference points to solutions
-    for ref_id, ref_values in filtered_reference_points.items():
-        obj_values = filtered_objective_values[ref_id]
-        plt.arrow(ref_values[0], ref_values[1], obj_values[0] - ref_values[0], obj_values[1] - ref_values[1], 
-                  head_width=0.1, head_length=0.1, fc='gray', ec='gray', zorder=4)
-    
-    plt.xlabel(nbi.objectives[objectives_to_use.index(1)].name)
-    plt.ylabel(nbi.objectives[objectives_to_use.index(1, objectives_to_use.index(1) + 1)].name)
-    plt.title('NBI method, NBI method with ' + str(nbi.num_ref_points) + ' reference points')
-    plt.grid(True)
-    if not normalize_scale:
-        plt.gca().set_aspect('equal', adjustable='box')  # Ensure the same scale for x and y axes
-    plt.show()
-'''
+
+
 def plot_NBI_3D_to_2D(nbi, objectives_to_use, normalize_scale=False, swap_axes=False):
     objective_values = nbi.solutions_ref_to_values()  # Dict with refpoint_id: [objective_values_of_solution]
     reference_points = nbi.ref_points_dict  # Dict with refpoint_id: [objective_values_of_refpoint]
