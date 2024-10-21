@@ -365,7 +365,7 @@ def plot_NBI_3D_to_2D(nbi, objectives_to_use, normalize_scale=False, swap_axes=F
         obj_values = filtered_objective_values[ref_id]
         x1, y1 = (ref_values[1], ref_values[0]) if swap_axes else (ref_values[0], ref_values[1])
         x2, y2 = (obj_values[1], obj_values[0]) if swap_axes else (obj_values[0], obj_values[1])
-        plt.arrow(x1, y1, x2 - x1, y2 - y1, head_width=0.1, head_length=0.1, fc='gray', ec='gray', zorder=4)
+        plt.arrow(x1, y1, x2 - x1, y2 - y1, head_width=0.01, head_length=0.01, fc='gray', ec='gray', zorder=4)
     
     xlabel = nbi.objectives[objectives_to_use.index(1)].name
     ylabel = nbi.objectives[objectives_to_use.index(1, objectives_to_use.index(1) + 1)].name

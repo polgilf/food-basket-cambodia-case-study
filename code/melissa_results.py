@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 # Importing from the src directory
 from src.MOLP import MOLP, Solution
 from src.NBI import NBI, plot_NBI_2D, plot_NBI_3D, plot_NBI_3D_to_2D
+from src.nNBI import nNBI
 
 # Set up the directories
 project_dir = os.getcwd()
@@ -77,7 +78,7 @@ f3 = pulp.LpVariable('Total CO2e', lowBound=0, cat='Continuous') # Minimize CO2 
 # Objective function (defined as constraints, to be minimized)
 model += f1 == pulp.lpSum([x[food_item] * food_items_data[food_item]['cost'] for food_item in food_items]) # Eq 5.1
 model += f2 == pulp.lpSum([100 * (zlow[food_group] + zup[food_group]) / food_groups_data[food_group]['mean intake'] for food_group in food_groups]) # Eq 5.2
-model += f3 == pulp.lpSum([2000 * (1/1000) * x[food_item] * food_items_data[food_item]['co2'] for food_item in food_items]) # Eq 5.3
+model += f3 == pulp.lpSum([(1/1000) * x[food_item] * food_items_data[food_item]['co2'] for food_item in food_items]) # Eq 5.3
 
 # Constraints
 for nutrient in nutrients:
@@ -129,17 +130,30 @@ num_ref_points = 10
 # Run the NBI algorithm
 #----------------------------------------------
 # Create the MOLP object
+'''
+# Non normalized NBI
 molp = MOLP(model, objectives, variables)
 # Compute the individual optima for all objectives
 sol = molp.compute_all_individual_optima()
-
-
 # Create the NBI object (inherits from MOLP and adds the NBI algorithm)
 nbi = NBI(model, objectives, variables)
 # Compute NBI algorithm
 nbi.NBI_algorithm(num_ref_points)
+'''
+# Normalized NBI
+# Create the NBI object (inherits from MOLP and adds the NBI algorithm)
+nnbi = nNBI(model, objectives, variables)
+
+nnbi.compute_all_individual_optima()
+
+nnbi.normalize_objectives_and_individual_optima()
+
+nnbi.normalized_NBI_algorithm(num_ref_points)
+
+nnbi.denormalize_solutions()
+
 # Plot
 #plot_NBI_3D(nbi, normalize_scale=True)
-plot_NBI_3D_to_2D(nbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
-plot_NBI_3D_to_2D(nbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
-plot_NBI_3D_to_2D(nbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
+plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
+plot_NBI_3D_to_2D(nnbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
+plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
