@@ -165,6 +165,7 @@ class nNBI(MOLP):
 
     def solve_normalized_NBI_subproblem(self, normalized_ref_point):
         sub_problem = deepcopy(self.prob)
+        original_individual_optima = deepcopy(self.individual_optima)
         t = pulp.LpVariable("t", 0, None)
         sub_problem.setObjective(t)
         sub_problem.sense = pulp.LpMaximize
@@ -178,6 +179,7 @@ class nNBI(MOLP):
                 new_variables.append(v)
         solution = Solution(self.normalized_objectives, new_variables)
         sub_problem = None
+        self.individual_optima = original_individual_optima
         return solution
 
     def normalized_NBI_algorithm(self, num_points):
@@ -186,12 +188,12 @@ class nNBI(MOLP):
         self.compute_normalized_ref_points()
         self.compute_normalized_normal_vector()
         self.normalized_solutions_dict = {}
+
         # Solve NBI subproblem for each reference point
         for ref_id, ref_point in self.normalized_ref_points_dict.items():
             solution = self.solve_normalized_NBI_subproblem(ref_point)
             # Store solution in dictionary {ref_point_id: Solution object}
             self.normalized_solutions_dict[ref_id] = solution
-            #print('Inside NBI algorithm:', ref_id, ' ', 'ref: ', ref_point, 'sol:', solution.objective_values(), 'var:', solution.variable_values())
         print("NBI algorithm completed.")
         return self.normalized_solutions_dict
 

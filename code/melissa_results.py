@@ -72,7 +72,7 @@ zup = pulp.LpVariable.dicts('zup', food_groups, lowBound=0, cat='Continuous') # 
 
 # Objectives (defined as variables)
 f1 = pulp.LpVariable('Total Cost', lowBound=0, cat='Continuous') # Minimize cost
-f2 = pulp.LpVariable('Total inadherence', lowBound=0, cat='Continuous') # Maximize energy intake
+f2 = pulp.LpVariable('Total inadherence', lowBound=0, cat='Continuous') # Maximize adderence to current consumption
 f3 = pulp.LpVariable('Total CO2e', lowBound=0, cat='Continuous') # Minimize CO2 emissions
 
 # Objective function (defined as constraints, to be minimized)
@@ -129,17 +129,8 @@ num_ref_points = 10
 #----------------------------------------------
 # Run the NBI algorithm
 #----------------------------------------------
-# Create the MOLP object
-'''
-# Non normalized NBI
-molp = MOLP(model, objectives, variables)
-# Compute the individual optima for all objectives
-sol = molp.compute_all_individual_optima()
-# Create the NBI object (inherits from MOLP and adds the NBI algorithm)
-nbi = NBI(model, objectives, variables)
-# Compute NBI algorithm
-nbi.NBI_algorithm(num_ref_points)
-'''
+
+
 # Normalized NBI
 # Create the NBI object (inherits from MOLP and adds the NBI algorithm)
 nnbi = nNBI(model, objectives, variables)
@@ -152,8 +143,28 @@ nnbi.normalized_NBI_algorithm(num_ref_points)
 
 nnbi.denormalize_solutions()
 
-# Plot
-#plot_NBI_3D(nbi, normalize_scale=True)
+plot_NBI_3D(nnbi, normalize_scale=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
+
+'''
+# Non normalized NBI
+molp = MOLP(model, objectives, variables)
+# Compute the individual optima for all objectives
+sol = molp.compute_all_individual_optima()
+# Create the NBI object (inherits from MOLP and adds the NBI algorithm)
+nbi = NBI(model, objectives, variables)
+# Compute NBI algorithm
+nbi.NBI_algorithm(num_ref_points)
+
+print([sol.objective_values() for sol in nbi.individual_optima])
+
+print(nbi.payoff_matrix())
+
+# Plot
+#plot_NBI_3D(nbi, normalize_scale=True)
+#plot_NBI_3D_to_2D(nbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
+#plot_NBI_3D_to_2D(nbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
+#plot_NBI_3D_to_2D(nbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
+'''
