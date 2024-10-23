@@ -127,7 +127,7 @@ for food_item in food_items:
 #----------------------------------------------
 # Parameters
 #----------------------------------------------
-num_ref_points = 20
+num_ref_points = 10
 
 #----------------------------------------------
 # Run the NBI algorithm
@@ -173,7 +173,7 @@ food_items = [food_item.replace('/', ' ') for food_item in food_items]
 '''
 #Heat map of results_df based on values food items rows and solutions columns
 plt.figure(figsize=(20, 10))
-sns.heatmap(results_df[food_items].T, cmap='coolwarm', cbar_kws={'label': 'Amount (g)'})
+sns.heatmap(results_df[food_itemss].T, cmap='coolwarm', cbar_kws={'label': 'Amount (g)'})
 plt.xlabel('Solutions')
 plt.ylabel('Food items')
 plt.title('Amount of food items in each solution')
@@ -183,7 +183,9 @@ plt.show()
 
 
 # Create a custom colormap from white to dark blue
-cmap = LinearSegmentedColormap.from_list('custom_blue', ['white', 'darkblue'])
+#cmap = LinearSegmentedColormap.from_list('custom_blue', ['white', 'darkblue'])
+cmap = LinearSegmentedColormap.from_list('custom', ['white', 'green', 'orange'])
+
 def plot_it(df=results_df, cmap=cmap):
     # Heat map of results_df based on values food items rows and solutions columns
     plt.figure(figsize=(20, 10))
