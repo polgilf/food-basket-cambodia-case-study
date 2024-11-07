@@ -124,7 +124,7 @@ for food_item in food_items:
 #----------------------------------------------
 # Parameters
 #----------------------------------------------
-num_ref_points = 20
+num_ref_points = 10
 
 #----------------------------------------------
 # Run the NBI algorithm
@@ -143,7 +143,7 @@ nnbi.normalized_NBI_algorithm(num_ref_points)
 
 nnbi.denormalize_solutions()
 
-#plot_NBI_3D(nnbi, normalize_scale=True)
+plot_NBI_3D(nnbi, normalize_scale=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
 plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
@@ -155,7 +155,7 @@ molp = MOLP(model, objectives, variables)
 sol = molp.compute_all_individual_optima()
 # Create the NBI object (inherits from MOLP and adds the NBI algorithm)
 nbi = NBI(model, objectives, variables)
-# Compute NBI algorithm
+# Compute NBI algorithmP
 nbi.NBI_algorithm(num_ref_points)
 
 print([sol.objective_values() for sol in nbi.individual_optima])
