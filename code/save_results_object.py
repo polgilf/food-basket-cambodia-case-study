@@ -3,10 +3,8 @@ import pulp
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap
+import pickle
 
-import seaborn as sns
-from copy import deepcopy
 # Importing from the src directory
 from src.MOLP import MOLP, Solution
 from src.NBI import NBI, plot_NBI_2D, plot_NBI_3D, plot_NBI_3D_to_2D
@@ -134,7 +132,6 @@ num_ref_points = 10
 # Run the NBI algorithm
 #----------------------------------------------
 
-
 # Normalized NBI
 # Create the NBI object (inherits from MOLP and adds the NBI algorithm)
 nnbi = nNBI(model, objectives, variables)
@@ -147,76 +144,7 @@ nnbi.normalized_NBI_algorithm(num_ref_points)
 
 nnbi.denormalize_solutions()
 
-#----------------------------------------------
-# Heat map of food items
-#----------------------------------------------
+plot_NBI_3D(nnbi, normalize_scale=True)
 
-results = deepcopy(nnbi)
-
-results.solutions_dict
-
-food_items = list(food_items_cost_co2_intake_df.index)
-
-results_variable_dict = {}
-for i, sol in results.solutions_dict.items():
-    results_variable_dict[i] = sol.variable_dict()
-
-# results_variable_dict to df
-results_df = pd.DataFrame(results_variable_dict).T
-# Remove 'x_' and all '_' from the column names
-results_df.columns = results_df.columns.str.replace('x_', '').str.replace('_', ' ')
-
-column_names = list(results_df.columns)
-food_items = food_items
-# Replace '/' with ' ' in food_items
-food_items = [food_item.replace('/', ' ') for food_item in food_items]
-
-'''
-#Heat map of results_df based on values food items rows and solutions columns
-plt.figure(figsize=(20, 10))
-sns.heatmap(results_df[food_itemss].T, cmap='coolwarm', cbar_kws={'label': 'Amount (g)'})
-plt.xlabel('Solutions')
-plt.ylabel('Food items')
-plt.title('Amount of food items in each solution')
-plt.show()
-'''
-
-
-
-# Create a custom colormap from white to dark blue
-#cmap = LinearSegmentedColormap.from_list('custom_blue', ['white', 'darkblue'])
-cmap = LinearSegmentedColormap.from_list('custom', ['white', 'green', 'orange'])
-
-def plot_it(df=results_df, cmap=cmap):
-    # Heat map of results_df based on values food items rows and solutions columns
-    plt.figure(figsize=(20, 10))
-    sns.heatmap(df, cmap=cmap, cbar_kws={'label': 'Amount (g)'})
-    plt.xlabel('Solutions', fontsize=9)
-    plt.ylabel('Food items')
-    plt.title('Amount of food items in each solution')
-    plt.show()
-
-print(results_df[food_items].T)
-#plot_it(df=results_df[food_items].T)
-
-
-#Heatmap only for food items with non-zero values
-non_zero_food_items = results_df.columns[results_df.sum(axis=0) > 0]
-#Only food items that have non-zero values with names in food_items
-non_zero_food_items = [food_item for food_item in non_zero_food_items if food_item in food_items]
-
-#print(results_df[non_zero_food_items].T)
-#plot_it(df=results_df[non_zero_food_items].T)
-
-# Clustermap of non-zero food items and dendrogram of both food items and solutions
-def clustermap_it(df=results_df[non_zero_food_items].T, cmap=cmap):
-    sns.clustermap(df, cmap=cmap, col_cluster=True, row_cluster=True, cbar_kws={'label': 'Amount (g)'})
-    plt.xlabel('Solutions')
-    plt.ylabel('Food items')
-    plt.title('Amount of food items in each solution')
-    plt.show()
-
-clustermap_it()
-
-
-
+with open('melissa_results.pkl', 'rb') as outp:
+    pickle.dump(nnbi, outp, pickle.HIGHEST_PROTOCOL)

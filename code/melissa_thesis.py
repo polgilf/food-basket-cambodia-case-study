@@ -13,6 +13,7 @@ from src.nNBI import nNBI
 project_dir = os.getcwd()
 code_dir = os.path.join(project_dir, 'code')
 data_dir = os.path.join(project_dir, 'data')
+data_dir = os.path.join(data_dir, 'melissa_thesis')
 
 # Read data
 nutritional_requirements_df = pd.read_excel(os.path.join(data_dir, 'female_nutritional_requirements.xlsx'), index_col=0, header=0)
@@ -144,9 +145,9 @@ nnbi.normalized_NBI_algorithm(num_ref_points)
 nnbi.denormalize_solutions()
 
 plot_NBI_3D(nnbi, normalize_scale=True)
-plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
-plot_NBI_3D_to_2D(nnbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
-plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
+#plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,0,1], normalize_scale=True, swap_axes=True)
+#plot_NBI_3D_to_2D(nnbi, objectives_to_use=[0,1,1], normalize_scale=True, swap_axes=True)
+#plot_NBI_3D_to_2D(nnbi, objectives_to_use=[1,1,0], normalize_scale=True, swap_axes=True)
 
 '''
 # Non normalized NBI
