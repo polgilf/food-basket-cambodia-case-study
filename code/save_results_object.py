@@ -146,5 +146,5 @@ nnbi.denormalize_solutions()
 
 plot_NBI_3D(nnbi, normalize_scale=True)
 
-with open('melissa_results.pkl', 'rb') as outp:
+with open('melissa_results.pkl', 'wb') as outp:
     pickle.dump(nnbi, outp, pickle.HIGHEST_PROTOCOL)
